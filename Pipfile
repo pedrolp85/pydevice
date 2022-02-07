@@ -1,0 +1,28 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+
+fastapi = "*"
+Requests = "*"
+uvicorn = "*"
+gunicorn = "*"
+pydantic = "*"
+sqlalchemy = "*"
+pymysql = "*"
+cryptography = "*"
+
+[dev-packages]
+isort = "*"
+black = "==21.5b1"
+flake8 = "*"
+autoflake = "*"
+vulture = "*"
+mypy = "*"
+pydantic = "*"
+pytest = "*"
+
+[requires]
+python_version = "3.7"
