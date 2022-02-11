@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  builder: 
+    build: .
+    volumes:
+    - ./app:/app
+    ports:
+    - 80:80
+    entrypoint: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80", "--reload"]
+    depends_on: 
+    - mysql
+
+  mysql:
+    image: mysql:8.0.19
+    ports:
+     - 3306:3306
+    # volumes:
+    # - ./dbfiles:/var/lib/mysql
+    environment: 
+      - MYSQL_DATABASE=py_device
+      - MYSQL_ROOT_PASSWORD=password    

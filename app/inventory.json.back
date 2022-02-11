@@ -1,0 +1,29 @@
+[
+
+    {
+        "id": 1,
+        "name":"FW_INT1_json",
+        "manufacturer": "paloalto",
+        "model":"VM100",
+        "mgmt_interface":{
+            "id": 1,
+            "name": "mgmt0",
+            "ip_address": "172.16.0.22"
+        }
+    },
+    
+    {
+        "id": 2,
+        "name":"BranchCSR1000v_json",
+        "manufacturer":"cisco",
+        "model":"VM100",
+        "mgmt_interface":{
+            "id": 1,
+            "name": "FastEthernet0",
+            "ip_address": "172.16.0.23"
+        }
+    }
+    
+    
+    ]
+    

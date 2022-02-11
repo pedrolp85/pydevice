@@ -1,0 +1,51 @@
+import configparser
+
+# class MyParser(ConfigParser.ConfigParser):
+
+#     def as_dict(self):
+#         d = dict(self._sections)
+#         for k in d:
+#             d[k] = dict(self._defaults, **d[k])
+#             d[k].pop('__name__', None)
+#         return d
+
+
+config = configparser.ConfigParser()
+config.read('inventory.ini')
+print(config)
+#device_list = [Device(**dict(config.items(section))) for section in config.sections()]
+diction = {}
+print(f"Esto son las secciones: {config.sections()}")
+for section in config.sections():
+    #d = dict(config.options(section))
+    #d.update({"device_name": section})
+    device_dictionary = { option : config.get(section,option) for option in config.options(section) if option != 'mgmt_interface'}
+    device_dictionary.update({ "device_name": section})
+    mgmt_values = config.get(section,"mgmt_interface").split(',')
+    mgmt_interface_dict = {"id": mgmt_values[0], "name": mgmt_values[1], "ip_address": mgmt_values[2]}   
+    device_dictionary.update({ "mgmt_interface": mgmt_interface_dict })
+    print(device_dictionary)
+    # 1,mgmt0,172.16.0.22,     name: str
+    #ip_address: ipaddress.IPv4Address
+    # print(config.options(section))
+    # for k in d:
+    #     if k == "mgmt_interface":
+    #         pass
+    #     else:
+    #         d[k] = config.get(section,k)
+
+    
+    # print(f"Seccion {section}")
+    # print(f"    Para la seccion {section} estos son los items {config[section].items()}")
+    # print(f"    Para la seccion {section} estos son las opciones {config.options(section)}")
+    # for item in config[section].items():
+    #     print("     ",item)
+    # print(f"    Esto es config.items(section) {config.items(section)}")
+
+
+# for section in config.sections():
+#     diction.update({"device_name": section})
+#     rest_dict = [ config.items(section) for item in config[section].items() ]
+#     print(diction)
+#     print(rest_dict)
+# print("fin del fichero de config")

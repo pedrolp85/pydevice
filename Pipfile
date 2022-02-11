@@ -13,6 +13,7 @@ pydantic = "*"
 sqlalchemy = "*"
 pymysql = "*"
 cryptography = "*"
+pyyaml = "*"
 
 [dev-packages]
 isort = "*"
