@@ -1,41 +1,100 @@
-from typing import List
+import logging
+from typing import List, Optional
 
-from exception_handler.exception_handler import exception_handler
+from exception_handler.exception_handler import (
+    default_exception_handler,
+    exception_handler,
+)
 from fastapi import Depends, FastAPI, Request
 from model.device import Device
-from repository import get_devices_repository
-from repository.devices import DevicesRepository
+from model.interface import L3Interface
+from model.manufacturer import Manufacturer
+from repository.devices import get_devices_repository
+from repository.devices.devices import DevicesRepository
 from repository.exceptions import MyBaseException
+from repository.interfaces import get_interfaces_repository
+from repository.interfaces.interfaces import InterfacesRepository
+from repository.manufacturers import get_manufacturers_repository
+from repository.manufacturers.manufacturers import ManufacturersRepository
+from settings import *
+
+logging.basicConfig(format="%(asctime)s - %(message)s", datefmt="%d-%b-%y %H:%M:%S")
+logging.basicConfig(level=logging.DEBUG)
+
 
 app = FastAPI()
+
+logging.debug(f"FastAPI PyDevice started")
 
 
 @app.get("/")
 def read_root():
+    logging.debug(f"PyDevice GET /")
     return {"Hello": "This is the PyDevice API root dir "}
 
 
 @app.get("/device")
 def get_devices(
-    repository: DevicesRepository = Depends(get_devices_repository),
+    repository: DevicesRepository = Depends(get_devices_repository(INVENTORY_SOURCE)),
+    manufacturer: Optional[str] = None,
 ) -> List[Device]:
-    return repository.get_devices()
+    logging.debug(f"PyDevice GET /device/?manufacturer={manufacturer}")
+    return repository.get_devices(manufacturer)
+
+
+@app.get("/manufacturer")
+def get_manufacturers(
+    repository: ManufacturersRepository = Depends(get_manufacturers_repository),
+) -> List[Manufacturer]:
+    logging.debug(f"PyDevice GET /manufacturer")
+    return repository.get_manufacturers()
+
+
+@app.get("/interface")
+def get_interfaces(
+    repository: InterfacesRepository = Depends(
+        get_interfaces_repository(INTERFACES_SOURCE)
+    ),
+    device_id: Optional[int] = None,
+) -> List[L3Interface]:
+    logging.debug(f"PyDevice GET /interface/?device_id={device_id}")
+    return repository.get_interfaces(device_id)
 
 
 @app.get("/device/{device_id}")
 def get_device(
     device_id: int, repository: DevicesRepository = Depends(get_devices_repository)
 ) -> List[Device]:
+    logging.debug(f"'PyDevice GET /device'{device_id}")
     return repository.get_device(device_id)
+
+
+@app.get("/manufacturer/{manufacturer_id}")
+def get_manufacturer(
+    manufacturer_id: int,
+    repository: ManufacturersRepository = Depends(get_manufacturers_repository),
+) -> List[Manufacturer]:
+    logging.debug(f"PyDevice GET /manufacturer/{manufacturer_id}")
+    return repository.get_manufacturer(manufacturer_id)
 
 
 @app.post("/device")
 def create_device(
     device: Device, repository: DevicesRepository = Depends(get_devices_repository)
 ) -> None:
-    print("create device")
-    print("Entrypoint")
+    logging.debug(f"PyDevice POST /device")
     repository.create_device(device)
+    return {"toma": "que te gusta"}
+
+
+@app.post("/manufacturer")
+def create_device(
+    manufacturer: Manufacturer,
+    repository: ManufacturersRepository = Depends(get_manufacturers_repository),
+) -> None:
+    logging.debug(f"PyDevice POST /manufacturer")
+    repository.create_manufacturer(manufacturer)
+
 
 # @app.put("/team/{team_id}")
 # def update_team(
@@ -70,6 +129,11 @@ def create_device(
 @app.exception_handler(MyBaseException)
 def unicorn_exception_handler(request: Request, exc: MyBaseException):
     return exception_handler(request, exc)
+
+
+@app.exception_handler(Exception)
+def unicorn_default_exception_handler(request: Request, exc: MyBaseException):
+    return default_exception_handler(request, exc)
 
 
 if __name__ == "__main__":  # pragma: no cover

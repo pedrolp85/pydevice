@@ -5,7 +5,7 @@ Los dispositivos estarán en un inventario y alcanzables desde la LAN del servid
 
 Inventario:
 
-Acepta 3 implentaciones: INI, yaml y BBDD
+Acepta 3 implentaciones: INI, yaml, JSON y BBDD
 Contiene información del fabricante, la IP, nombre del dispositivos
 Soporta peticiones CRUD 
 
@@ -15,6 +15,12 @@ Información a recuperar:
 - La informacion se podrá recuperar Por dispositivo o por fabricante, en el segundo caso las peticiones podrían ser concurrentes si hay más de 1 dispositivo de cada fabricante
 
 - Virtual Servers en F5 -> modelar en Pydantic
+
+/manufacturer/
+/device/?manufacturer="cisco"
+
+/device/interfaces
+
 
 Dicha información permanecerá en BBDD durante un tiempo TTL. Si el TTL es 0, dicha información tendrá que ser recuperada del dispositivo mediante SSH
 

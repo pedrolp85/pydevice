@@ -26,3 +26,10 @@ def exception_handler(request: Request, exc: MyBaseException) -> JSONResponse:
         status_code=_EXCEPTION_DEFAULT_CODE,
         content={"msg": exc.error_description()},
     )
+
+
+def default_exception_handler(request: Request, exc: MyBaseException) -> JSONResponse:
+    return JSONResponse(
+        status_code=_EXCEPTION_DEFAULT_CODE,
+        content={"msg": "general error, try later"},
+    )

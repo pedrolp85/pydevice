@@ -19,16 +19,36 @@ class ResourceAlreadyExistsException(ResourceException):
         return f"Resource '{self._id}' already exists."
 
 
-class ResourceNotFoundException(ResourceException):
-    def error_description(self):
-        return f"Resource '{self._id}' does not exists."
-
-
 class DeviceAlreadyExistsException(ResourceAlreadyExistsException):
     def error_description(self):
         return f"Device '{self._id}' already exists."
 
 
+class ManufacturerAlreadyExistsException(ResourceAlreadyExistsException):
+    def error_description(self):
+        return f"Manufacturer '{self._id}' already exists."
+
+
+class InterfaceAlreadyExistsException(ResourceAlreadyExistsException):
+    def error_description(self):
+        return f"Interface '{self._id}' already exists."
+
+
+class ResourceNotFoundException(ResourceException):
+    def error_description(self):
+        return f"Resource '{self._id}' does not exist."
+
+
 class DeviceNotFoundException(ResourceNotFoundException):
     def error_description(self):
-        return f"Resource '{self._id}' does not exists."
+        return f"Resource '{self._id}' does not exist."
+
+
+class ManufacturerNotFoundException(ResourceNotFoundException):
+    def error_description(self):
+        return f"Manufacturer '{self._id}' does not exist."
+
+
+class InterfaceNotFoundException(ResourceNotFoundException):
+    def error_description(self):
+        return f"Interface '{self._id}' does not exist."

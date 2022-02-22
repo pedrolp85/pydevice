@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "paloalto_json",
+        "full_name": "PALO ALTO NETWORKS INC."
+    },
+    {
+        "id": 2,
+        "name": "cisco_json",
+        "full_name": "CISCO SYSTEMS INC."
+    },
+    {
+        "id": 3,
+        "name": "extreme_json",
+        "full_name": "EXTREME NETWORKS INC."
+    }
+]

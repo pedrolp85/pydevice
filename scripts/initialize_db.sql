@@ -1,43 +1,56 @@
 SHOW DATABASES;
-USE nba_cli;
-DROP TABLE player;
-DROP TABLE team;
+USE py_device;
+DROP TABLE device;
+DROP TABLE manufacturer;
+DROP TABLE l3interface;
 
-CREATE TABLE team (
+CREATE TABLE manufacturer (
     id int NOT NULL AUTO_INCREMENT,
-    abbreviation varchar(3) ,
-    city varchar(25),
-    conference varchar(10) ,
-    division varchar(25) ,
-    full_name varchar(50) NOT NULL,
+    name varchar(10) NOT NULL,
+    enterprise_name varchar(25) NOT NULL,
     PRIMARY KEY (id)
 );
 
-INSERT INTO team (abbreviation, city, conference, division, full_name) VALUES
-    ('LAL','Los Angeles', 'West','Pacific','Los Angeles Lakers'),
-    ('MEM', 'Memphis','West','Southwest','Memphis Grizzlies'),
-    ('BOS', 'Boston', 'East','Atlantic','Boston Celtics'),
-    ('DET', 'Detroit' ,'East','Central','Detroit Pistons')
-    ;
-
-
-CREATE TABLE player (
+CREATE TABLE l3interface (
     id int NOT NULL AUTO_INCREMENT,
-    first_name varchar(50) NOT NULL,
-    last_name varchar(50) NOT NULL,
-    position varchar(2),
-    team_id int ,
-    PRIMARY KEY (id),
-    FOREIGN KEY (team_id) REFERENCES team(id)
+    name varchar(20) NOT NULL,
+    ip_address varchar(20) NOT NULL,
+    PRIMARY KEY (id)
 );
 
 
-INSERT INTO player (first_name, last_name, position, team_id) VALUES
-    ('Lebron','James','F', 1),
-    ('Rodney','McGruder','F', 4) 
+CREATE TABLE device (
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(20) NOT NULL,
+    model varchar(20) NOT NULL,
+    manufacturer_id int ,
+    mgmt_interface_id int,
+    PRIMARY KEY (id),
+    FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id),
+    FOREIGN KEY (mgmt_interface_id) REFERENCES l3interface(id)
+);
+
+
+INSERT INTO manufacturer (name, enterprise_name) VALUES
+    ('paloalto','PALO ALTO NETWORKS INC.'),
+    ('cisco', 'CISCO SYSTEMS INC.')
     ;
 
+INSERT INTO l3interface (name, ip_address ) VALUES
+    ('mgmt0','172.16.0.22'),
+    ('FastEthernet0','172.16.0.23') 
+    ;
+
+INSERT INTO device (name, model, manufacturer_id, mgmt_interface_id) VALUES
+    ('FW_INT1','VM100',1, 1),
+    ('BranchCSR1000v','iosxe',2, 2) 
+    ;
+
+
+
 SELECT *
-FROM player
-INNER JOIN team
-ON player.team_id = team.id;
+FROM device
+INNER JOIN manufacturer
+ON device.manufacturer_id = manufacturer.id
+INNER JOIN l3interface
+ON device.mgmt_interface_id = l3interface.id
