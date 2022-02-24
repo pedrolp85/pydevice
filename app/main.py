@@ -51,8 +51,6 @@ def create_device(
     repository: DevicesRepository = Depends(get_devices_repository),
 ) -> Device:
     logging.debug(f"PyDevice POST /device")
-    print("BBBBBBBBBBBBBBBBBBBBBB")
-    
     return repository.create_device(device)
 
 
