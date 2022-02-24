@@ -15,5 +15,5 @@ class Device(BaseModel):
     name: str
     manufacturer_id: int
     model: str
-    state: Device_State
+    state: Optional[Device_State]
     mgmt_interface_id: int
