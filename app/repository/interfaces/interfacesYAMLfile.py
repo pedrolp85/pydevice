@@ -1,6 +1,6 @@
 import ipaddress
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 import yaml
 from model.interface import L3Interface
@@ -8,6 +8,7 @@ from repository.exceptions import (
     InterfaceAlreadyExistsException,
     InterfaceNotFoundException,
 )
+from settings import *
 
 from .interfaces import InterfacesRepository
 
@@ -26,11 +27,17 @@ yaml.add_constructor("!ipaddress.IPv4Address", ipv4_constructor)
 
 
 class InterfacesRepositoryYAMLFile(InterfacesRepository):
-    def __init__(self, file_name: str = "interfaces.yml") -> None:
-        self._file_name = file_name
+    def __init__(self, file_source: Optional[str] ) -> None:
+        super().__init__(file_source)        
+        self._file_name = self._get_dir(self._file_source)
         self._interfaces = (
-            self._get_interfaces_from_yaml_file() if Path(file_name).is_file() else []
+            self._get_interfaces_from_yaml_file()
+            if Path(self._file_name).is_file()
+            else []
         )
+
+    def _get_dir(self, file_name: str) -> Path:
+        return Path(__file__).parent.parent.parent / self._file_source / "interfaces.yml"
 
     def _get_interfaces_from_yaml_file(self) -> List[L3Interface]:
         with open(self._file_name) as file:

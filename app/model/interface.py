@@ -8,3 +8,4 @@ class L3Interface(BaseModel):
     name: str
     ip_address: ipaddress.IPv4Address
     device_id: int
+    ttl: int

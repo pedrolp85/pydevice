@@ -1,9 +1,21 @@
 import os
 
-INVENTORY_SOURCE = os.getenv("INVENTORY_SOURCE")
-MANUFACTURERS_SOURCE = os.getenv("MANUFACTURERS_SOURCE")
-INTERFACES_SOURCE = os.getenv("INTERFACES_SOURCE")
+from pydantic import BaseSettings
+from dotenv import load_dotenv
 
-INVENTORY_FILE_SOURCE = os.getenv("INVENTORY_FILE_SOURCE")
-MANUFACTURERS_FILE_SOURCE = os.getenv("MANUFACTURERS_FILE_SOURCE")
-INTERFACES_FILE_SOURCE = os.getenv("INTERFACES_FILE_SOURCE")
+
+class Settings(BaseSettings):
+
+    inventory_source: str = os.getenv('INVENTORY_SOURCE')
+    manufacturers_source: str = os.getenv('MANUFACTURERS_SOURCE')
+    interfaces_source: str = os.getenv('INTERFACES_SOURCE')
+    inventory_file_source: str = os.getenv('INVENTORY_FILE_SOURCE')
+    manufacturers_file_source: str = os.getenv('MANUFACTURERS_FILE_SOURCE')
+    interfaces_file_source: str = os.getenv('INTERFACES_FILE_SOURCE')
+
+    class Config:
+        env_file = "test.env"
+
+
+
+

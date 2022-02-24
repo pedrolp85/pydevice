@@ -1,16 +1,16 @@
-import configparser
-import ipaddress
-import json
 from abc import ABCMeta, abstractmethod
-from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
-from model.device import Device, Device_State
-from pydantic.json import pydantic_encoder
-from repository.exceptions import DeviceAlreadyExistsException, DeviceNotFoundException
+
+
+from model.device import Device
 
 
 class DevicesRepository(metaclass=ABCMeta):
+    
+    def __init__(self, file_source: Optional[str]):
+        self._file_source = file_source
+
     @abstractmethod
     def get_device(self, id: int) -> Device:
         pass

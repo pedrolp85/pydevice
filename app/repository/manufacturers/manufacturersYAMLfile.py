@@ -1,6 +1,6 @@
 import ipaddress
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 import yaml
 from model.manufacturer import Manufacturer
@@ -26,12 +26,18 @@ yaml.add_constructor("!ipaddress.IPv4Address", ipv4_constructor)
 
 
 class ManufacturersRepositoryYAMLFile(ManufacturersRepository):
-    def __init__(self, file_name: str = "manufacturers.yml") -> None:
-        self._file_name = file_name
+    def __init__(self, file_source: Optional[str] ) -> None:
+        super().__init__(file_source)        
+        self._file_name = self._get_dir(self._file_source)
         self._manufacturers = (
             self._get_manufacturers_from_yaml_file()
-            if Path(file_name).is_file()
+            if Path(self._file_name).is_file()
             else []
+        )
+
+    def _get_dir(self, file_name: str) -> Path:
+        return (
+            Path(__file__).parent.parent.parent / self._file_source / "manufacturers.yml"
         )
 
     def _get_manufacturers_from_yaml_file(self) -> List[Manufacturer]:

@@ -1,0 +1,12 @@
+[paloalto_ini]
+id = 1
+full_name = PALO ALTO NETWORKS INC.
+
+[cisco_ini]
+id = 2
+full_name = CISCO SYSTEMS INC.
+
+[extreme_ini]
+id = 3
+full_name = EXTREME NETWORKS INC.
+

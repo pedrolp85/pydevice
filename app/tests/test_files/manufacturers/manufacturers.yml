@@ -1,0 +1,11 @@
+---
+
+- paloalto_yaml:
+    full_name: PALO ALTO NETWORKS (IBERIA) SL
+    id: 1
+- cisco_yaml:
+    full_name: CISCO SYSTEMS INC.
+    id: 2
+- extreme_yaml:
+    full_name: EXTREME NETWORKS INC.
+    id: 3

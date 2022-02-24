@@ -1,6 +1,6 @@
 import ipaddress
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 import yaml
 from model.device import Device
@@ -23,8 +23,9 @@ yaml.add_constructor("!ipaddress.IPv4Address", ipv4_constructor)
 
 
 class DevicesRepositoryYAMLFile(DevicesRepository):
-    def __init__(self, file_name: str = "inventory.yml") -> None:
-        self._file_name = file_name
+    def __init__(self,file_source: Optional[str] ) -> None:
+        super().__init__(file_source)        
+        self._file_name = self._get_dir(self._file_source)
         self._devices = (
             self._get_devices_from_yaml_file()
             if Path(self._file_name).is_file()
@@ -32,7 +33,7 @@ class DevicesRepositoryYAMLFile(DevicesRepository):
         )
 
     def _get_dir(self, file_name: str) -> Path:
-        return Path(__file__).parent.parent.parent / INVENTORY_FILE_SOURCE / file_name
+        return Path(__file__).parent.parent.parent / self._file_source / "inventory.yml"
 
     def _get_devices_from_yaml_file(self) -> List[Device]:
         with open(self._file_name) as file:

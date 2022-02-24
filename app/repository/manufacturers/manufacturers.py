@@ -2,7 +2,7 @@ import configparser
 import json
 from abc import ABCMeta, abstractmethod
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from model.manufacturer import Manufacturer
 from pydantic.json import pydantic_encoder
@@ -13,6 +13,10 @@ from repository.exceptions import (
 
 
 class ManufacturersRepository(metaclass=ABCMeta):
+    
+    def __init__(self, file_source: Optional[str]):
+        self._file_source = file_source    
+    
     @abstractmethod
     def get_manufacturer(self, id: int) -> Manufacturer:
         pass

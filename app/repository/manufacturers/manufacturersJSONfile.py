@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from model.manufacturer import Manufacturer
 from pydantic.json import pydantic_encoder
@@ -13,12 +13,18 @@ from .manufacturers import ManufacturersRepository
 
 
 class ManufacturersRepositoryJSONFile(ManufacturersRepository):
-    def __init__(self, file_name: str = "manufacturers.json") -> None:
-        self._file_name = file_name
+    def __init__(self, file_source: Optional[str] ) -> None:
+        super().__init__(file_source)        
+        self._file_name = self._get_dir(self._file_source)
         self._manufacturers = (
             self._get_manufacturers_from_json_file()
-            if Path(file_name).is_file()
+            if Path(self._file_name).is_file()
             else []
+        )
+
+    def _get_dir(self, file_name: str) -> Path:
+        return (
+            Path(__file__).parent.parent.parent / self._file_source / "manufacturers.json"
         )
 
     def _get_manufacturers_from_json_file(self) -> List[Manufacturer]:

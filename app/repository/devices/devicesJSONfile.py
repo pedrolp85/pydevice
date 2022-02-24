@@ -1,18 +1,18 @@
 import json
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from model.device import Device
 from pydantic.json import pydantic_encoder
 from repository.exceptions import DeviceAlreadyExistsException, DeviceNotFoundException
-from settings import *
 
 from .devices import DevicesRepository
 
 
 class DevicesRepositoryJSONFile(DevicesRepository):
-    def __init__(self, file_name: str = "inventory.json") -> None:
-        self._file_name = self._get_dir(file_name)
+    def __init__(self, file_source: Optional[str] ) -> None:
+        super().__init__(file_source)        
+        self._file_name = self._get_dir(self._file_source)
         self._devices = (
             self._get_devices_from_json_file()
             if Path(self._file_name).is_file()
@@ -20,7 +20,7 @@ class DevicesRepositoryJSONFile(DevicesRepository):
         )
 
     def _get_dir(self, file_name: str) -> Path:
-        return Path(__file__).parent.parent.parent / INVENTORY_FILE_SOURCE / file_name
+        return Path(__file__).parent.parent.parent / self._file_source / "inventory.json"
 
     def _get_devices_from_json_file(self) -> List[Device]:
         with open(self._file_name, mode="r") as f:

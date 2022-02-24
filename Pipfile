@@ -15,6 +15,7 @@ pymysql = "*"
 cryptography = "*"
 pyyaml = "*"
 python-logstash = "*"
+python-dotenv = "*"
 
 [dev-packages]
 isort = "*"
