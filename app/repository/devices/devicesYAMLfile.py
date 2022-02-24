@@ -3,24 +3,21 @@ from pathlib import Path
 from typing import List, Optional
 
 import yaml
-from model.device import Device
+from model.device import Device, Device_State
 from repository.exceptions import DeviceAlreadyExistsException, DeviceNotFoundException
 
 from .devices import DevicesRepository
 
 
-def ipv4_representer(dumper, data):
-    return dumper.represent_scalar("!ipaddress.IPv4Address", str(data))
+def device_state_representer(dumper, data):
+    return dumper.represent_scalar("!Device_State", data.value)
 
-
-def ipv4_constructor(loader, node):
+def device_state_constructor(loader, node):
     value = loader.construct_scalar(node)
-    return ipaddress.IPv4Address(value)
+    return Device_State(value)
 
-
-yaml.add_representer(ipaddress.IPv4Address, ipv4_representer)
-yaml.add_constructor("!ipaddress.IPv4Address", ipv4_constructor)
-
+yaml.add_representer(Device_State, device_state_representer)
+yaml.add_constructor("!Device_State", device_state_constructor)
 
 class DevicesRepositoryYAMLFile(DevicesRepository):
     def __init__(self,file_source: Optional[str] ) -> None:

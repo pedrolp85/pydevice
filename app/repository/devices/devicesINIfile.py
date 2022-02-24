@@ -2,7 +2,7 @@ import configparser
 from pathlib import Path
 from typing import List, Optional
 
-from model.device import Device
+from model.device import Device, Device_State
 from repository.exceptions import DeviceAlreadyExistsException, DeviceNotFoundException
 
 
@@ -25,7 +25,6 @@ class DevicesRepositoryINIFile(DevicesRepository):
         ini_parser.read(self._file_name)
         device_list = []
         for section in ini_parser.sections():
-            print(section)
             device_dictionary = {
                 option: ini_parser.get(section, option)
                 for option in ini_parser.options(section)
@@ -41,8 +40,11 @@ class DevicesRepositoryINIFile(DevicesRepository):
         for device in devices_to_save:
             parser.add_section(device["name"])
             for k, v in device.items():
-                parser.set(device["name"], k, str(v))
-        with open("inventory.ini", "w") as configfile:
+                if v.__class__.__name__ == "Device_State":
+                   parser.set(device["name"], k, v.value) 
+                else:
+                    parser.set(device["name"], k, str(v))
+        with open(self._file_name, "w") as configfile:
             parser.write(configfile)
 
     def get_device(self, id: int) -> Device:

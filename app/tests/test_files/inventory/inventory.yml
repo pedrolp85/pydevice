@@ -1,24 +1,18 @@
 - FW_INT1_yaml:
     id: 1
-    interfaces: null
     manufacturer_id: 1
     mgmt_interface_id: 1
     model: VM100
-    state: null
-    virtual_servers: null
+    state: !Device_State 'unknown'
 - BranchCSR1000v_yaml:
     id: 2
-    interfaces: null
     manufacturer_id: 2
     mgmt_interface_id: 3
     model: VM100
-    state: null
-    virtual_servers: null
+    state: !Device_State 'unknown'
 - FW_INT2_yaml:
     id: 3
-    interfaces: null
     manufacturer_id: 1
     mgmt_interface_id: 5
     model: VM100
-    state: null
-    virtual_servers: null
+    state: !Device_State 'unknown'

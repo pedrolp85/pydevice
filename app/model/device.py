@@ -4,10 +4,10 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class Device_State(Enum):
-    UNKNOWN = 0
-    PASSIVE = 1
-    ACTIVE = 2
+class Device_State(str, Enum):
+    UNKNOWN = 'unknown'
+    PASSIVE = 'passive'
+    ACTIVE = 'active'
 
 
 class Device(BaseModel):
@@ -15,5 +15,5 @@ class Device(BaseModel):
     name: str
     manufacturer_id: int
     model: str
-    state: Optional[Device_State]
+    state: Device_State
     mgmt_interface_id: int

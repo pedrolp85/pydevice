@@ -4,7 +4,7 @@
         "name": "FW_INT1_json",
         "manufacturer_id": 1,
         "model": "VM100",
-        "state": null,
+        "state": "unknown",
         "mgmt_interface_id": 2
     },
     {
@@ -12,7 +12,7 @@
         "name": "BranchCSR1000v_json",
         "manufacturer_id": 2,
         "model": "VM100",
-        "state": null,
+        "state": "unknown",
         "mgmt_interface_id": 3
     },
     {
@@ -20,8 +20,15 @@
         "name": "FW_INT2_json",
         "manufacturer_id": 1,
         "model": "VM100",
-        "state": null,
+        "state": "unknown",
         "mgmt_interface_id": 5
+    },
+    {
+        "id": 5,
+        "name": "FW_INT3_ini",
+        "manufacturer_id": 1,
+        "model": "VM100",
+        "state": "unknown",
+        "mgmt_interface_id": 7
     }
-
 ]

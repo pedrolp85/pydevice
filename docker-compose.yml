@@ -1,7 +1,14 @@
 version: "3.9"
 
 services:
-  builder: 
+
+  builder:
+    build:
+      context: .
+      dockerfile: Dockerfile-builder
+    volumes:
+      - .:/code
+  app: 
     build: .
     volumes:
     - ./app:/app
