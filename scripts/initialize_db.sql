@@ -1,8 +1,9 @@
+#!/bin/bash
+
+mysql -u root -ppassword << QUERY_INPUT
+
 SHOW DATABASES;
 USE py_device;
-DROP TABLE device;
-DROP TABLE manufacturer;
-DROP TABLE l3interface;
 
 CREATE TABLE manufacturer (
     id int NOT NULL AUTO_INCREMENT,
@@ -54,3 +55,5 @@ INNER JOIN manufacturer
 ON device.manufacturer_id = manufacturer.id
 INNER JOIN l3interface
 ON device.mgmt_interface_id = l3interface.id
+
+QUERY_INPUT

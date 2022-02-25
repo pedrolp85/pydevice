@@ -26,6 +26,9 @@ services:
      - 3306:3306
     # volumes:
     # - ./dbfiles:/var/lib/mysql
+    volumes:
+    - ./scripts/initialize_db.sql:/docker-entrypoint-initdb.d/initialize_db.sql
+    
     environment: 
       - MYSQL_DATABASE=py_device
       - MYSQL_ROOT_PASSWORD=password

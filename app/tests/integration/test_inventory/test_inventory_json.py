@@ -33,7 +33,7 @@ def test_create_device_json_successful(mock_env_var_json):
     last_number = (devices[-1]).id
     response = client.post("/device",
     json={
-        "id": 100,
+        "id": last_number+1 ,
         "name": "FW_INT3_json",
         "manufacturer_id": 1,
         "model": "VM100",
@@ -41,12 +41,5 @@ def test_create_device_json_successful(mock_env_var_json):
         "mgmt_interface_id":7
         },
     )
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa")
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa")
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa")
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa")
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa")
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaa")
-    print(response.json())
-    #assert response.status_code == 200
+    assert response.status_code == 200
     assert response.json()['name'] == "FW_INT3_json"

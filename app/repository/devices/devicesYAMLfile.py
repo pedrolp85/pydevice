@@ -1,6 +1,6 @@
 import ipaddress
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Any
 
 import yaml
 from model.device import Device, Device_State
@@ -59,12 +59,14 @@ class DevicesRepositoryYAMLFile(DevicesRepository):
                 return device
         raise DeviceNotFoundException(id)
 
-    def create_device(self, device: Device) -> None:
+
+    def create_device(self, device: Device) -> Any:
         try:
             self.get_device(device.id)
         except DeviceNotFoundException:
             self._devices.append(device)
             self._save_devices_to_yaml_file()
+            return device
         else:
             raise DeviceAlreadyExistsException(device.id)
 

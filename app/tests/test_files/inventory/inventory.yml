@@ -16,3 +16,45 @@
     mgmt_interface_id: 5
     model: VM100
     state: !Device_State 'unknown'
+- FW_INT3_json4:
+    id: 4
+    manufacturer_id: 1
+    mgmt_interface_id: 7
+    model: VM100
+    state: !Device_State 'unknown'
+- FW_INT3_json5:
+    id: 5
+    manufacturer_id: 1
+    mgmt_interface_id: 7
+    model: VM100
+    state: !Device_State 'unknown'
+- FW_INT3_json6:
+    id: 6
+    manufacturer_id: 1
+    mgmt_interface_id: 7
+    model: VM100
+    state: !Device_State 'unknown'
+- FW_INT3_yaml7:
+    id: 7
+    manufacturer_id: 1
+    mgmt_interface_id: 7
+    model: VM100
+    state: !Device_State 'unknown'
+- FW_INT3_yaml8:
+    id: 8
+    manufacturer_id: 1
+    mgmt_interface_id: 7
+    model: VM100
+    state: !Device_State 'unknown'
+- FW_INT3_yaml9:
+    id: 9
+    manufacturer_id: 1
+    mgmt_interface_id: 7
+    model: VM100
+    state: !Device_State 'unknown'
+- FW_INT3_yaml10:
+    id: 10
+    manufacturer_id: 1
+    mgmt_interface_id: 7
+    model: VM100
+    state: !Device_State 'unknown'

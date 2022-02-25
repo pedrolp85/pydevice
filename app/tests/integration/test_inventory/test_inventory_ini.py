@@ -3,6 +3,7 @@ import os
 from unittest import mock
 from fastapi.testclient import TestClient
 from main import app
+from model.device import Device
 from settings import Settings, get_settings
 from unittest import mock
 import pytest
@@ -26,18 +27,19 @@ def test_get_device_ini(mock_env_var_ini):
     assert response.status_code == 200
     assert response.json()['name'] == "BranchCSR1000v_INI"
 
-# def test_create_device_ini():
-#     app.dependency_overrides[get_settings] = get_settings_override_ini
-#     response = client.post("/device",
-#     json={
-#         "id": 4,
-#         "name": "FW_INT3_json",
-#         "manufacturer_id": 1,
-#         "model": "VM100",
-#         "state": "unknown",
-#         "mgmt_interface_id":7
-#         },
-#     )
-#     assert response.status_code == 307
-#     assert response == 0
-#     app.dependency_overrides = {}
+def test_create_device_ini_successful(mock_env_var_ini):
+    devices_raw = client.get("/device")
+    devices =  [ Device(**p) for p in devices_raw.json() ]
+    last_number = (devices[-1]).id
+    response = client.post("/device",
+    json={
+        "id": last_number+1 ,
+        "name": "FW_INT3_json"+str(last_number + 1),
+        "manufacturer_id": 1,
+        "model": "VM100",
+        "state": "unknown",
+        "mgmt_interface_id":7
+        },
+    )
+    assert response.status_code == 200
+    assert response.json()['name'] == "FW_INT3_json"+str(last_number + 1)

@@ -12,16 +12,9 @@ DEPENDENCY_RESOLVE_DICT = {
     "YAML": DevicesRepositoryYAMLFile,
 }
 
-def get_devices_repository(settings: Optional[Settings] = None) -> DevicesRepository:
+def get_devices_repository() -> DevicesRepository:
 
-    settings = settings or get_settings()
-    print("AAAAAAAAAAAAAAAAAAAAAAAAA")
-    print(settings)
-    if settings.inventory_source == "JSON":
-        print("DEVUELVE JSON")
-        return DevicesRepositoryJSONFile(settings.inventory_file_source)
-    if settings.inventory_source == "INI":
-        return DevicesRepositoryINIFile(settings.inventory_file_source)
-    if settings.inventory_source == "YML":
-        return DevicesRepositoryYAMLFile(settings.inventory_file_source)    
+    settings = get_settings()
+    return DEPENDENCY_RESOLVE_DICT[settings.inventory_source](settings.inventory_file_source)
+    
         

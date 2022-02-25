@@ -94,5 +94,29 @@
         "model": "VM100",
         "state": "unknown",
         "mgmt_interface_id": 7
+    },
+    {
+        "id": 100,
+        "name": "FW_INT3_json",
+        "manufacturer_id": 1,
+        "model": "VM100",
+        "state": "unknown",
+        "mgmt_interface_id": 7
+    },
+    {
+        "id": 101,
+        "name": "FW_INT3_json",
+        "manufacturer_id": 1,
+        "model": "VM100",
+        "state": "unknown",
+        "mgmt_interface_id": 7
+    },
+    {
+        "id": 102,
+        "name": "FW_INT3_json",
+        "manufacturer_id": 1,
+        "model": "VM100",
+        "state": "unknown",
+        "mgmt_interface_id": 7
     }
 ]

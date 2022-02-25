@@ -132,3 +132,13 @@ net self vlan133_floating {
     traffic-group traffic-group-1
     unit 1
     vlan VLAN133
+
+
+# ayuda:
+Tenemos un contenedor builder para ejecutar los tests:
+docker-compose run --rm builder pytest 
+
+
+
+y un runner para ejecutar la aplicación cion Unvicorn
+docker-compose up app

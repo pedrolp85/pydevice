@@ -5,7 +5,7 @@ from .interfacesYAMLfile import InterfacesRepositoryYAMLFile
 from settings import Settings, get_settings
 
 
-from fastapi import Depends
+
 
 DEPENDENCY_RESOLVE_DICT = {
     "JSON": InterfacesRepositoryJSONFile,
@@ -14,11 +14,7 @@ DEPENDENCY_RESOLVE_DICT = {
 }
 
 
-def get_interfaces_repository(settings: Settings = Depends(get_settings)) -> InterfacesRepository:
+def get_interfaces_repository() -> InterfacesRepository:
 
-    if settings.interfaces_source == "JSON":
-        return InterfacesRepositoryJSONFile(settings.interfaces_file_source)
-    if settings.interfaces_source == "INI":
-        return InterfacesRepositoryINIFile(settings.interfaces_file_source)
-    if settings.interfaces_source == "YML":
-        return InterfacesRepositoryYAMLFile(settings.interfaces_file_source)
+    settings = get_settings()
+    return DEPENDENCY_RESOLVE_DICT[settings.interfaces_source](settings.interfaces_file_source)

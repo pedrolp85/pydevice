@@ -1,6 +1,6 @@
 import configparser
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Any
 
 from model.device import Device, Device_State
 from repository.exceptions import DeviceAlreadyExistsException, DeviceNotFoundException
@@ -54,12 +54,13 @@ class DevicesRepositoryINIFile(DevicesRepository):
                 return device
         raise DeviceNotFoundException(id)
 
-    def create_device(self, device: Device) -> None:
+    def create_device(self, device: Device) -> Any:
         try:
             self.get_device(device.id)
         except DeviceNotFoundException:
             self._devices.append(device)
             self._save_devices_to_ini_file()
+            return device
         else:
             raise DeviceAlreadyExistsException(device.id)
 
