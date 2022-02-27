@@ -13,5 +13,20 @@
         "id": 3,
         "name": "extreme_json",
         "full_name": "EXTREME NETWORKS INC."
+    },
+    {
+        "id": 4,
+        "name": "test_manufacturer_4",
+        "full_name": "ACME TEST MANUFACTURER"
+    },
+    {
+        "id": 5,
+        "name": "test_manufacturer_5",
+        "full_name": "ACME TEST MANUFACTURER"
+    },
+    {
+        "id": 6,
+        "name": "test_manufacturer_6",
+        "full_name": "ACME TEST MANUFACTURER"
     }
 ]

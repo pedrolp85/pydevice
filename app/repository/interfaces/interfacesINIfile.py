@@ -46,7 +46,7 @@ class InterfacesRepositoryINIFile(InterfacesRepository):
             parser.add_section(interface["name"])
             for k, v in interface.items():
                 if v and k != "name":
-                    parser.set(device["name"], k, str(v))
+                    parser.set(interface["name"], k, str(v))
         with open(self._file_name, "w") as configfile:
             parser.write(configfile)
 
@@ -61,8 +61,9 @@ class InterfacesRepositoryINIFile(InterfacesRepository):
         try:
             self.get_interface(interface.id)
         except InterfaceNotFoundException:
-            self._interfaces.append(device)
+            self._interfaces.append(interface)
             self._save_interfaces_to_ini_file()
+            return interface
         else:
             raise InterfaceAlreadyExistsException(device.id)
 

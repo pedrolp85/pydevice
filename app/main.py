@@ -51,9 +51,8 @@ def create_device(
     repository: DevicesRepository = Depends(get_devices_repository),
 ) -> Device:
     logging.debug(f"PyDevice POST /device")
-    print("BBBBBBBBBBBBBBBBBBBBBB")
-    
     return repository.create_device(device)
+
 
 
 
@@ -75,6 +74,15 @@ def get_manufacturer(
 ) -> List[Manufacturer]:
     logging.debug(f"PyDevice GET /manufacturer/{manufacturer_id}")
     return repository.get_manufacturer(manufacturer_id)
+
+@app.post("/manufacturer")
+def create_manufacturer(
+    manufacturer: Manufacturer,
+    repository: ManufacturersRepository = Depends(get_manufacturers_repository),
+) -> Manufacturer:
+    logging.debug(f"PyDevice POST /manufacturer")
+    return repository.create_manufacturer(manufacturer)
+
 
 
 @app.get("/interface")
@@ -98,7 +106,13 @@ def get_interface(
     logging.debug(f"PyDevice GET /interface/?interface_id={interface_id}")
     return repository.get_interface(interface_id)
 
-
+@app.post("/interface")
+def create_interface(
+    interface: L3Interface,
+    repository: InterfacesRepository = Depends(get_interfaces_repository),
+) -> L3Interface:
+    logging.debug(f"PyDevice POST /interface")
+    return repository.create_interface(interface)
 
 
 

@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Any
 
 from model.interface import L3Interface
 from pydantic.json import pydantic_encoder
@@ -46,12 +46,13 @@ class InterfacesRepositoryJSONFile(InterfacesRepository):
                 return interface
         raise InterfaceNotFoundException(id)
 
-    def create_interface(self, interface: L3Interface) -> None:
+    def create_interface(self, interface: L3Interface) -> Any:
         try:
             self.get_interface(interface.id)
         except InterfaceNotFoundException:
-            self._interfaces.append(device)
+            self._interfaces.append(interface)
             self._save_interfaces_to_json_file()
+            return interface
         else:
             raise InterfaceAlreadyExistsException(device.id)
 

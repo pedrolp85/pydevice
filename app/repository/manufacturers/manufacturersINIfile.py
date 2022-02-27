@@ -1,6 +1,6 @@
 import configparser
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Any
 
 from model.manufacturer import Manufacturer
 from repository.exceptions import (
@@ -57,12 +57,13 @@ class ManufacturersRepositoryINIFile(ManufacturersRepository):
                 return manufacturer
         raise ManufacturerNotFoundException(id)
 
-    def create_manufacturer(self, manufacturer: Manufacturer) -> None:
+    def create_manufacturer(self, manufacturer: Manufacturer) -> Any:
         try:
             self.get_manufacturer(manufacturer.id)
         except ManufacturerNotFoundException:
             self._manufacturers.append(manufacturer)
             self._save_manufacturers_to_ini_file()
+            return manufacturer
         else:
             raise ManufacturerAlreadyExistsException(manufacturer.id)
 

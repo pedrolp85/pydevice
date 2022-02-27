@@ -1,5 +1,8 @@
 import os
 
+from model.manufacturer import Manufacturer
+
+from unittest import mock
 from fastapi.testclient import TestClient
 from main import app
 from settings import Settings, get_settings
@@ -9,34 +12,32 @@ import pytest
 
 client = TestClient(app)
 
+@pytest.fixture
+def mock_env_manufacturers_yaml() -> None:
+    with mock.patch.dict(os.environ, {"MANUFACTURERS_SOURCE": "YAML", "MANUFACTURERS_FILE_SOURCE": "tests/test_files/manufacturers"}):
+        yield
 
-def get_settings_override_manufacturers_yml():
-    return Settings(manufacturers_source="YML", manufacturers_file_source="tests/test_files/manufacturers")
-
-def test_get_manufacturers_yml():
-    app.dependency_overrides[get_settings] = get_settings_override_manufacturers_yml
+def test_get_manufacturers_yaml(mock_env_manufacturers_yaml):
     response = client.get("/manufacturer")
     assert response.status_code == 200
-    assert len(response.json()) == 3
+    assert len(response.json()) > 1 
     assert response.json()[0]['name'] == "paloalto_yaml"
-    app.dependency_overrides = {}
 
-def test_get_manufacturer_yml():
-    app.dependency_overrides[get_settings] = get_settings_override_manufacturers_yml
-    response = client.get("/manufacturer/3")
+def test_get_manufacturer_yaml(mock_env_manufacturers_yaml):
+    response = client.get("/manufacturer/2")
     assert response.status_code == 200
-    assert response.json()['name'] == "extreme_yaml"
-    app.dependency_overrides = {}
+    assert response.json()['name'] == "cisco_yaml"
 
-
-# def test_get_device_id_json():
-#     response = client.get("/device/1")
-#     assert response.status_code == 200
-#     assert response.json() == {
-#     "id": 1,
-#     "name": "FW_INT1_json",
-#     "manufacturer_id": 1,
-#     "model": "VM100",
-#     "state": None,
-#     "mgmt_interface_id": 2
-# }
+def test_create_manufacturer_yaml_successful(mock_env_manufacturers_yaml):
+    manufacturers_raw = client.get("/manufacturer")
+    manufacturers =  [ Manufacturer(**p) for p in manufacturers_raw.json() ]
+    last_number = (manufacturers[-1]).id
+    response = client.post("/manufacturer",
+    json={
+        "id": last_number+1 ,
+        "name": "test_manufacturer_"+str(last_number+1),
+        "full_name": "ACME TEST MANUFACTURER"
+        },
+    )
+    assert response.status_code == 200
+    assert response.json()['name'] == "test_manufacturer_"+str(last_number+1)

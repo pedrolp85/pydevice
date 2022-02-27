@@ -1,38 +1,35 @@
----
-
 - mgmt0_yaml:
+    device_id: 1
     id: 1
-    ip_address: 172.16.0.22 
-    device_id: 1
+    ip_address: !ipaddress.IPv4Address '172.16.0.22'
     ttl: 5
-
 - eth1/1_yaml:
-    id: 2
-    ip_address: 10.0.0.1
     device_id: 1
+    id: 2
+    ip_address: !ipaddress.IPv4Address '10.0.0.1'
     ttl: 2
-
 - FastEthernet0_yaml:
+    device_id: 2
     id: 3
-    ip_address: 172.16.0.23
-    device_id: 2
+    ip_address: !ipaddress.IPv4Address '172.16.0.23'
     ttl: 1
-
 - FastEthernet1_yaml:
-    id: 4
-    ip_address: 10.0.1.1
     device_id: 2
+    id: 4
+    ip_address: !ipaddress.IPv4Address '10.0.1.1'
     ttl: 1
-
 - mgmt0_yaml:
+    device_id: 3
     id: 1
-    ip_address: 172.16.0.24
-    device_id: 3
+    ip_address: !ipaddress.IPv4Address '172.16.0.24'
     ttl: 5
-
 - eth1/1_yaml:
-    id: 2
-    ip_address: 10.0.2.1
     device_id: 3
+    id: 2
+    ip_address: !ipaddress.IPv4Address '10.0.2.1'
     ttl: 3
-
+- fastTest0:
+    device_id: 1
+    id: 100
+    ip_address: !ipaddress.IPv4Address '172.16.100.101'
+    ttl: 3

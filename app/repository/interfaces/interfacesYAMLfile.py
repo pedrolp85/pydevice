@@ -1,6 +1,6 @@
 import ipaddress
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Any
 
 import yaml
 from model.interface import L3Interface
@@ -66,14 +66,15 @@ class InterfacesRepositoryYAMLFile(InterfacesRepository):
                 return interface
         raise InterfaceNotFoundException(id)
 
-    def create_interface(self, interface: L3Interface) -> None:
+    def create_interface(self, interface: L3Interface) -> Any:
         try:
             self.get_interface(interface.id)
         except InterfaceNotFoundException:
-            self._interfaces.append(device)
+            self._interfaces.append(interface)
             self._save_interfaces_to_yaml_file()
+            return interface
         else:
-            raise InterfaceAlreadyExistsException(device.id)
+            raise InterfaceAlreadyExistsException(interface.id)
 
     def update_interface(self, id: int, interface: L3Interface) -> None:
         try:
