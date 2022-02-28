@@ -63,3 +63,8 @@
     id: 106
     ip_address: !ipaddress.IPv4Address '172.16.100.101'
     ttl: 3
+- fastTest0:
+    device_id: 1
+    id: 107
+    ip_address: !ipaddress.IPv4Address '172.16.100.101'
+    ttl: 3

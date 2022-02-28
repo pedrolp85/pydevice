@@ -76,3 +76,9 @@
     mgmt_interface_id: 7
     model: VM100
     state: !Device_State 'unknown'
+- FW_INT3_yaml14:
+    id: 14
+    manufacturer_id: 1
+    mgmt_interface_id: 7
+    model: VM100
+    state: !Device_State 'unknown'

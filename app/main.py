@@ -57,62 +57,62 @@ def create_device(
 
 
 
-@app.get("/manufacturer")
-def get_manufacturers(
-    repository: ManufacturersRepository = Depends(
-        get_manufacturers_repository)
-        ) -> List[Manufacturer]:
-    logging.debug(f"PyDevice GET /manufacturer")
-    return repository.get_manufacturers()
+# @app.get("/manufacturer")
+# def get_manufacturers(
+#     repository: ManufacturersRepository = Depends(
+#         get_manufacturers_repository)
+#         ) -> List[Manufacturer]:
+#     logging.debug(f"PyDevice GET /manufacturer")
+#     return repository.get_manufacturers()
 
-@app.get("/manufacturer/{manufacturer_id}")
-def get_manufacturer(
-    manufacturer_id: int,
-    repository: ManufacturersRepository = Depends(
-        get_manufacturers_repository
-    ),
-) -> List[Manufacturer]:
-    logging.debug(f"PyDevice GET /manufacturer/{manufacturer_id}")
-    return repository.get_manufacturer(manufacturer_id)
+# @app.get("/manufacturer/{manufacturer_id}")
+# def get_manufacturer(
+#     manufacturer_id: int,
+#     repository: ManufacturersRepository = Depends(
+#         get_manufacturers_repository
+#     ),
+# ) -> List[Manufacturer]:
+#     logging.debug(f"PyDevice GET /manufacturer/{manufacturer_id}")
+#     return repository.get_manufacturer(manufacturer_id)
 
-@app.post("/manufacturer")
-def create_manufacturer(
-    manufacturer: Manufacturer,
-    repository: ManufacturersRepository = Depends(get_manufacturers_repository),
-) -> Manufacturer:
-    logging.debug(f"PyDevice POST /manufacturer")
-    return repository.create_manufacturer(manufacturer)
+# @app.post("/manufacturer")
+# def create_manufacturer(
+#     manufacturer: Manufacturer,
+#     repository: ManufacturersRepository = Depends(get_manufacturers_repository),
+# ) -> Manufacturer:
+#     logging.debug(f"PyDevice POST /manufacturer")
+#     return repository.create_manufacturer(manufacturer)
 
 
 
-@app.get("/interface")
-def get_interfaces(
-    repository: InterfacesRepository = Depends(
-        get_interfaces_repository
-    ),
-    device_id: Optional[int] = None,
-) -> List[L3Interface]:
-    logging.debug(f"PyDevice GET /interface/?device_id={device_id}")
-    return repository.get_interfaces()
+# @app.get("/interface")
+# def get_interfaces(
+#     repository: InterfacesRepository = Depends(
+#         get_interfaces_repository
+#     ),
+#     device_id: Optional[int] = None,
+# ) -> List[L3Interface]:
+#     logging.debug(f"PyDevice GET /interface/?device_id={device_id}")
+#     return repository.get_interfaces()
 
-@app.get("/interface/{interface_id}")
-def get_interface(
-    interface_id: int,
-    repository: InterfacesRepository = Depends(
-        get_interfaces_repository
-    ),
-    device_id: Optional[int] = None,
-) -> List[L3Interface]:
-    logging.debug(f"PyDevice GET /interface/?interface_id={interface_id}")
-    return repository.get_interface(interface_id)
+# @app.get("/interface/{interface_id}")
+# def get_interface(
+#     interface_id: int,
+#     repository: InterfacesRepository = Depends(
+#         get_interfaces_repository
+#     ),
+#     device_id: Optional[int] = None,
+# ) -> List[L3Interface]:
+#     logging.debug(f"PyDevice GET /interface/?interface_id={interface_id}")
+#     return repository.get_interface(interface_id)
 
-@app.post("/interface")
-def create_interface(
-    interface: L3Interface,
-    repository: InterfacesRepository = Depends(get_interfaces_repository),
-) -> L3Interface:
-    logging.debug(f"PyDevice POST /interface")
-    return repository.create_interface(interface)
+# @app.post("/interface")
+# def create_interface(
+#     interface: L3Interface,
+#     repository: InterfacesRepository = Depends(get_interfaces_repository),
+# ) -> L3Interface:
+#     logging.debug(f"PyDevice POST /interface")
+#     return repository.create_interface(interface)
 
 
 

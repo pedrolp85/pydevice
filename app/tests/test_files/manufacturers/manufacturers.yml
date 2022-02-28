@@ -16,3 +16,6 @@
 - test_manufacturer_6:
     full_name: ACME TEST MANUFACTURER
     id: 6
+- test_manufacturer_7:
+    full_name: ACME TEST MANUFACTURER
+    id: 7
