@@ -7,7 +7,8 @@ from model.interface import L3Interface
 class InterfacesRepository(metaclass=ABCMeta):
     
     def __init__(self, file_source: Optional[str]):
-        self._file_source = file_source    
+        if file_source:
+            self._file_source = file_source    
     
     @abstractmethod
     def get_interface(self, id: int) -> L3Interface:

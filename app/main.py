@@ -85,34 +85,34 @@ def create_device(
 
 
 
-# @app.get("/interface")
-# def get_interfaces(
-#     repository: InterfacesRepository = Depends(
-#         get_interfaces_repository
-#     ),
-#     device_id: Optional[int] = None,
-# ) -> List[L3Interface]:
-#     logging.debug(f"PyDevice GET /interface/?device_id={device_id}")
-#     return repository.get_interfaces()
+@app.get("/interface")
+def get_interfaces(
+    repository: InterfacesRepository = Depends(
+        get_interfaces_repository
+    ),
+    device_id: Optional[int] = None,
+) -> List[L3Interface]:
+    logging.debug(f"PyDevice GET /interface/?device_id={device_id}")
+    return repository.get_interfaces()
 
-# @app.get("/interface/{interface_id}")
-# def get_interface(
-#     interface_id: int,
-#     repository: InterfacesRepository = Depends(
-#         get_interfaces_repository
-#     ),
-#     device_id: Optional[int] = None,
-# ) -> List[L3Interface]:
-#     logging.debug(f"PyDevice GET /interface/?interface_id={interface_id}")
-#     return repository.get_interface(interface_id)
+@app.get("/interface/{interface_id}")
+def get_interface(
+    interface_id: int,
+    repository: InterfacesRepository = Depends(
+        get_interfaces_repository
+    ),
+    device_id: Optional[int] = None,
+) -> List[L3Interface]:
+    logging.debug(f"PyDevice GET /interface/?interface_id={interface_id}")
+    return repository.get_interface(interface_id)
 
-# @app.post("/interface")
-# def create_interface(
-#     interface: L3Interface,
-#     repository: InterfacesRepository = Depends(get_interfaces_repository),
-# ) -> L3Interface:
-#     logging.debug(f"PyDevice POST /interface")
-#     return repository.create_interface(interface)
+@app.post("/interface")
+def create_interface(
+    interface: L3Interface,
+    repository: InterfacesRepository = Depends(get_interfaces_repository),
+) -> L3Interface:
+    logging.debug(f"PyDevice POST /interface")
+    return repository.create_interface(interface)
 
 
 
