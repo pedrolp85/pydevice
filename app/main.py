@@ -57,31 +57,31 @@ def create_device(
 
 
 
-# @app.get("/manufacturer")
-# def get_manufacturers(
-#     repository: ManufacturersRepository = Depends(
-#         get_manufacturers_repository)
-#         ) -> List[Manufacturer]:
-#     logging.debug(f"PyDevice GET /manufacturer")
-#     return repository.get_manufacturers()
+@app.get("/manufacturer")
+def get_manufacturers(
+    repository: ManufacturersRepository = Depends(
+        get_manufacturers_repository)
+        ) -> List[Manufacturer]:
+    logging.debug(f"PyDevice GET /manufacturer")
+    return repository.get_manufacturers()
 
-# @app.get("/manufacturer/{manufacturer_id}")
-# def get_manufacturer(
-#     manufacturer_id: int,
-#     repository: ManufacturersRepository = Depends(
-#         get_manufacturers_repository
-#     ),
-# ) -> List[Manufacturer]:
-#     logging.debug(f"PyDevice GET /manufacturer/{manufacturer_id}")
-#     return repository.get_manufacturer(manufacturer_id)
+@app.get("/manufacturer/{manufacturer_id}")
+def get_manufacturer(
+    manufacturer_id: int,
+    repository: ManufacturersRepository = Depends(
+        get_manufacturers_repository
+    ),
+) -> List[Manufacturer]:
+    logging.debug(f"PyDevice GET /manufacturer/{manufacturer_id}")
+    return repository.get_manufacturer(manufacturer_id)
 
-# @app.post("/manufacturer")
-# def create_manufacturer(
-#     manufacturer: Manufacturer,
-#     repository: ManufacturersRepository = Depends(get_manufacturers_repository),
-# ) -> Manufacturer:
-#     logging.debug(f"PyDevice POST /manufacturer")
-#     return repository.create_manufacturer(manufacturer)
+@app.post("/manufacturer")
+def create_manufacturer(
+    manufacturer: Manufacturer,
+    repository: ManufacturersRepository = Depends(get_manufacturers_repository),
+) -> Manufacturer:
+    logging.debug(f"PyDevice POST /manufacturer")
+    return repository.create_manufacturer(manufacturer)
 
 
 
@@ -116,45 +116,7 @@ def create_interface(
 
 
 
-# @app.post("/manufacturer")
-# def create_device(
-#     manufacturer: Manufacturer,
-#     repository: ManufacturersRepository = Depends(
-#         get_manufacturers_repository(settings.inventory_source)
-#     ),
-# ) -> None:
-#     logging.debug(f"PyDevice POST /manufacturer")
-#     repository.create_manufacturer(manufacturer)
 
-
-# # @app.put("/team/{team_id}")
-# # def update_team(
-# #     team_id: int,
-# #     team: Team,
-# #     repository: TeamsRepository = Depends(get_teams_repository),
-# # ) -> None:
-# #     repository.update_team(team_id, team)
-
-
-# # @app.get("/player")
-# # def get_players(
-# #     repository: PlayersRepository = Depends(get_players_repository),
-# # ) -> List[Team]:
-# #     return repository.get_players()
-
-# # @app.get("/player/{player_id}")
-# # def get_player(
-# #     player_id: int, repository: PlayersRepository = Depends(get_players_repository)
-# # ) -> List[Player]:
-# #     return repository.get_player(player_id)
-
-# # @app.post("/player")
-# # def create_player(
-# #     player: Player, repository: PlayersRepository = Depends(get_players_repository)
-# # ) -> None:
-# #     repository.create_player(player)
-
-# # Inyeccion de dependencias con FastAPI : https://fastapi.tiangolo.com/tutorial/dependencies/
 
 
 @app.exception_handler(MyBaseException)

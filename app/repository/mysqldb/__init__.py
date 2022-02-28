@@ -1,7 +1,3 @@
-# from repository.mysqldb.defaults import (
-#     get_devices_repository,
-#     get_manufacturers_repository
-# )
+from .defaults import _get_db
 
-
-# __all__ = ["get_devices_repository", "get_manufacturers_repository"]
+__all__ = [ "_get_db" ]
