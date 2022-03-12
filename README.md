@@ -142,3 +142,37 @@ docker-compose run --rm builder pytest
 
 y un runner para ejecutar la aplicación cion Unvicorn
 docker-compose up app
+
+
+Kafka cli commands:
+
+Nos conectamos al contenedor de kafka:
+docker exec -it contenedor-kafka bash
+
+crear un topic:
+
+/bin/kafka-broker-api-versions --bootstrap-server localhost:9092 --version  -> Mostrar version
+/bin/kafka-topics --list --bootstrap-server localhost:9092                  -> Mostrar topic creados  
+
+Producir un mensaje:
+
+/bin/kafka-console-producer --broker-list localhost:9092 --topic python_test3 --property parse.key=true --property key.separator=:
+
+-> Esto abre un terminal interactivo:
+>key:value
+>foo:bar
+>anotherKey:another value
+CNTRL-C para salir
+
+Consumir un mensaje
+
+/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic testtopic --formatter kafka.tools.DefaultMessageFormatter --property print.timestamp=true --property print.key=true --property print.value=true
+
+
+Ver las particiones y los mensajes de un topic:
+
+/bin/kafka-run-class kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic my-first-topic
+
+my-first-topic:0:3   las 3 particiones (0,1 y 2) tienen 3 mensajes
+my-first-topic:1:3
+my-first-topic:2:3

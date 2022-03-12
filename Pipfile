@@ -16,6 +16,9 @@ cryptography = "*"
 pyyaml = "*"
 python-logstash = "*"
 python-dotenv = "*"
+typer = "*"
+kafka-python = "*"
+
 
 [dev-packages]
 isort = "*"

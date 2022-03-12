@@ -150,5 +150,53 @@
         "model": "VM100",
         "state": "unknown",
         "mgmt_interface_id": 7
+    },
+    {
+        "id": 107,
+        "name": "FW_INT3_json",
+        "manufacturer_id": 1,
+        "model": "VM100",
+        "state": "unknown",
+        "mgmt_interface_id": 7
+    },
+    {
+        "id": 108,
+        "name": "FW_INT3_json",
+        "manufacturer_id": 1,
+        "model": "VM100",
+        "state": "unknown",
+        "mgmt_interface_id": 7
+    },
+    {
+        "id": 109,
+        "name": "FW_INT3_json",
+        "manufacturer_id": 1,
+        "model": "VM100",
+        "state": "unknown",
+        "mgmt_interface_id": 7
+    },
+    {
+        "id": 110,
+        "name": "FW_INT3_json",
+        "manufacturer_id": 1,
+        "model": "VM100",
+        "state": "unknown",
+        "mgmt_interface_id": 7
+    },
+    {
+        "id": 111,
+        "name": "FW_INT3_json",
+        "manufacturer_id": 1,
+        "model": "VM100",
+        "state": "unknown",
+        "mgmt_interface_id": 7
+    },
+    {
+        "id": 112,
+        "name": "FW_INT3_json",
+        "manufacturer_id": 1,
+        "model": "VM100",
+        "state": "unknown",
+        "mgmt_interface_id": 7
     }
 ]
