@@ -2,6 +2,10 @@ pipeline {
 
   agent any
 
+  environment {
+      MY_NAME = "Pedro"
+  }
+
 
   stages {
 
@@ -11,7 +15,7 @@ pipeline {
 
         sh '''
 
-          echo hola
+          echo "hola $MY_NAME"
 
         '''
 
