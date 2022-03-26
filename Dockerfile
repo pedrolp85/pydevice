@@ -8,4 +8,4 @@ COPY Pipfile.lock Pipfile.lock
 
 RUN set -ex && pipenv install --deploy --system
 
-COPY ./app /app
+COPY ./app /app 

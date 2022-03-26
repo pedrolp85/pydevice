@@ -21,11 +21,14 @@ help:          	   ## show this help
 tests:         	   ## make test [arguments] == pytest [arguments]  
 	$(RUN_COMMAND) builder pytest $(TEST_ARGS)
 
-app_run:           ## run the app in a container
-	$(RUN_COMMAND) -d app 
+api-run:           ## run the app in a container
+	$(RUN_COMMAND) app 
 
 app_logs: app  	   ## run the app and the log files      
 	$(RUN_COMMAND) -d kibana&& $(RUN_COMMAND) -d filebeat && $(RUN_COMMAND) -d elasticsearch
 
 stop:              ## stop all running containers   
 	docker container stop $$(docker ps -aq) && docker container rm $$(docker ps -aq)
+
+scheduler:     ## builds scheduler and rabbitmq broker
+	$(RUN_COMMAND) -d scheduler

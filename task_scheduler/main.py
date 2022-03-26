@@ -23,7 +23,8 @@ def task_scheduler(
         print (data.get_devices())
 
     schel = get_task_scheduler()
-    msg = schel.schedule_task()
+    msg = schel.send_test_msg()
+    msg_rcv = schel.recv_test_msg()
 
 
 if __name__ == "__main__":
