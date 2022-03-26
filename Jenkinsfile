@@ -10,17 +10,18 @@ pipeline {
   stages {
 
     stage('Hello') {
-
       steps {
-
         sh '''
-
           echo "hola $MY_NAME"
-
         '''
-
       }
-
+    }
+    stage('Bye bye') {
+      steps {
+        sh '''
+          echo "adios $MY_NAME"
+        '''
+      }
     }
 
   }
