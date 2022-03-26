@@ -176,3 +176,8 @@ Ver las particiones y los mensajes de un topic:
 my-first-topic:0:3   las 3 particiones (0,1 y 2) tienen 3 mensajes
 my-first-topic:1:3
 my-first-topic:2:3
+
+Hemos añadido un remote de gitea para el ci,
+git push -u ci main
+
+en gitea hemos creado un usuario jenkins/Didata2! para acceder al repo
