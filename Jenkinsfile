@@ -10,11 +10,22 @@ pipeline {
   stages {
 
     stage('Hello') {
-      steps {
-        sh '''
-          echo "hola $MY_NAME"
-        '''
-      }
+        parallel {
+            stage("1") {
+                steps {
+                    sh '''
+                    echo "hola $MY_NAME"
+                    '''
+                }
+            }
+            stage("2") {
+                steps {
+                    sh '''
+                    echo "hola David"
+                    '''
+                }
+            }
+        }
     }
     stage('Bye bye') {
       steps {
